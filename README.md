@@ -8,6 +8,8 @@ This project is bootstrap with `django-admin` and `create-react-app`.
 
 Ensure you have [pipenv](https://pypi.org/project/pipenv/) and [nvm](https://github.com/nvm-sh/nvm) installed, using the latest `python` and `node` versions from both frameworks.
 
+At the root project directory, run the following commands:
+
 ```
 # install dependencies
 yarn

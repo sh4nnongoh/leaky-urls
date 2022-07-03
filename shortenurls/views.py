@@ -19,21 +19,58 @@ def home(request):
 
 
 def shorten(request, encoded_url):
+    def generateRoute():
+        perm = list(permutations(characters, 3))
+        choice = ''.join(random.choice(perm))
+        print('possible shorten url: %s', choice)
+        return choice
+
+    def incrementRoute(route):
+        routeChars = list(route)
+        routeChars.reverse()
+        newRouteChars = []
+        index = 0
+        while (index < len(routeChars)):
+            char = routeChars[index]
+            if char == '9':
+                newRouteChars.append('a')
+            elif char == 'z':
+                newRouteChars.append('A')
+            elif (char == 'Z') and (index == len(routeChars)-1):
+                newRouteChars = ['0'] * len(routeChars)
+                break
+            elif char == 'Z':
+                newRouteChars.append('0')
+            else:
+                newChar = bytes([bytes(char, 'utf-8')[0] + 1]).decode('utf-8')
+                newRouteChars.append(newChar)
+                newRouteChars += routeChars[index+1:len(routeChars)]
+                newRouteChars.reverse()
+                break
+            index += 1
+        return ''.join(newRouteChars)
+
     url = base64.b64decode(encoded_url).decode('utf-8')
-    print('url: %s', url)
-    perm = list(permutations(characters, 3))
-    choice = ''.join(random.choice(perm))
-    print('possible shorten url: %s', choice)
-    db_result = URL.objects.filter(shorten=choice)
-    print('db result: %s', db_result)
-    if len(db_result) == 0:
-        new_url = URL(shorten=choice, original=url,
-                      created_at=timezone.now())
-        new_url.save()
-        print('new url saved')
-        context = {
-            'shorten_url': choice
-        }
+    route = ''
+    if len(URL.objects.all()) == len(list(permutations(characters, 3))):
+        # DB is full
+        oldEntry = URL.objects.order_by('created_at').first()
+        route = oldEntry.shorten
+        oldEntry.delete()
+    else:
+        # DB is not full
+        route = generateRoute()
+        db_result = URL.objects.filter(shorten=route)
+        while len(db_result) != 0:
+            # Find route that is not used
+            route = incrementRoute(route)
+            db_result = URL.objects.filter(shorten=route)
+    new_url = URL(shorten=route, original=url,
+                  created_at=timezone.now())
+    new_url.save()
+    context = {
+        'shorten_url': route
+    }
 
     return render(request, 'shorten/index.html', context)
 

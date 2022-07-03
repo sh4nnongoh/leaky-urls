@@ -17,9 +17,9 @@ const App = () => {
             <p>
               Your shorten URL is below!
             </p>
-            <text>
+            <div>
               {fullShortenURL}
-            </text>
+            </div>
           </>
         )}
       </header>

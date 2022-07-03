@@ -13,8 +13,16 @@
     "app:home": "yarn workspace @leaky-urls/home",
     "app:shorten": "yarn workspace @leaky-urls/shorten",
     "app:shorten-details": "yarn workspace @leaky-urls/shorten-details",
-    "lint": "yarn app:home lint && yarn app:shorten lint && yarn app:shorten-details lint",
-    "build": "yarn lint && yarn app:home build && yarn app:shorten build && yarn app:shorten-details build",
-    "start": "pipenv run ./manage.py runserver"
+    "test": "yarn concurrently 'yarn app:home test:ci' 'yarn app:shorten test:ci' 'yarn app:shorten-details test:ci'",
+    "lint": "yarn concurrently 'yarn app:home lint' 'yarn app:shorten lint' 'yarn app:shorten-details lint'",
+    "build": "yarn app:home build && yarn app:shorten build && yarn app:shorten-details build",
+    "build:home": "yarn app:home build",
+    "build:shorten": "yarn app:shorten build",
+    "build:shorten-details": "yarn app:shorten-details build",
+    "start": "pipenv run ./manage.py runserver",
+    "install": "pipenv install"
+  },
+  "dependencies": {
+    "concurrently": "^7.2.2"
   }
 }

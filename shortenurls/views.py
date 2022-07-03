@@ -39,7 +39,17 @@ def shorten(request, encoded_url):
 
 
 def shorten_details(request, shorten_url):
-    return render(request, 'shorten-details/index.html')
+    route = shorten_url
+    db_result = URL.objects.filter(shorten=route)
+    if len(db_result) == 0:
+        return redirect('/')
+    entry = db_result.first()
+    context = {
+        'original': entry.original,
+        'shorten_url': entry.shorten,
+        'created_at': entry.created_at,
+    }
+    return render(request, 'shorten-details/index.html', context)
 
 
 def redirect_shorten_url(request, shorten_url):

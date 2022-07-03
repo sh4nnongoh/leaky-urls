@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 const App = () => {
-  const shortenURL = (((window as any).django)?.shorten_url || "");
+  const shortenURL = (((window as any).django)?.shorten_url);
   const hasShortenURL = shortenURL !== "{{ shorten_url }}";
   if (window.location.pathname !== "/" && !hasShortenURL) {
     window.location.pathname = "/";

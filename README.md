@@ -10,7 +10,10 @@ Ensure you have [pipenv](https://pypi.org/project/pipenv/) and [nvm](https://git
 
 ```
 # install dependencies
-yarn install
+yarn
+
+# migrate the database
+yarn migrate
 
 # run all tests
 yarn test

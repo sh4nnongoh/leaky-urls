@@ -19,7 +19,10 @@
     "build:home": "yarn app:home build",
     "build:shorten": "yarn app:shorten build",
     "build:shorten-details": "yarn app:shorten-details build",
-    "start": "pipenv run ./manage.py runserver",
+    "django": "pipenv run ./manage.py",
+    "makemigrations": "yarn django makemigrations",
+    "migrate": "yarn django migrate",
+    "start": "yarn django runserver",
     "install": "pipenv install"
   },
   "dependencies": {

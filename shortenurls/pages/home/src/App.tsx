@@ -9,28 +9,31 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <form>
-          <label htmlFor="url">
-            Enter the URL you want shorten below!
-            <br />
-            <input
-              type="text"
-              id="url"
-              name="url"
-              value={url}
-              style={{
-                width: 500,
-                height: 30
-              }}
-              onChange={(e) => {
-                setUrl(e.target.value);
-              }}
-            />
-          </label>
+        <label htmlFor="url">
+          Enter the URL you want shorten below!
           <br />
-        </form>
+          <input
+            type="text"
+            id="url"
+            name="url"
+            value={url}
+            style={{
+              width: 500,
+              height: 30
+            }}
+            onChange={(e) => {
+              const input = e.target.value;
+              if (input.startsWith("https://") || input.startsWith("http://")) {
+                setUrl(input);
+              } else {
+                setUrl(`https://${input}`);
+              }
+            }}
+          />
+        </label>
+        <br />
         <a href={`/shorten/${encodedUrl}`}>
-          <button type="submit"> Link button </button>
+          <button type="submit"> Submit </button>
         </a>
       </header>
     </div>

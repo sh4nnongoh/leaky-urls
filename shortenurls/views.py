@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import base64
 import random
@@ -27,7 +27,7 @@ def shorten(request, encoded_url):
     db_result = URL.objects.filter(shorten=choice)
     print('db result: %s', db_result)
     if len(db_result) == 0:
-        new_url = URL(shorten=choice, original='url',
+        new_url = URL(shorten=choice, original=url,
                       created_at=timezone.now())
         new_url.save()
         print('new url saved')
@@ -42,5 +42,9 @@ def shorten_details(request, shorten_url):
     return render(request, 'shorten-details/index.html')
 
 
-def redirect_shorten_url():
-    return "WIP"
+def redirect_shorten_url(request, shorten_url):
+    route = shorten_url.split('/')[-1]
+    db_result = URL.objects.filter(shorten=route)
+    if len(db_result) == 0:
+        return redirect('/')
+    return redirect(db_result.first().original)

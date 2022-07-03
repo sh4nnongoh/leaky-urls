@@ -3,20 +3,22 @@ import logo from "./logo.svg";
 import "./App.css";
 const App = () => {
   const shortenURL = (((window as any).django)?.shorten_url || "");
-  if (window.location.pathname !== "/" && !shortenURL) {
+  const hasShortenURL = shortenURL !== "{{ shorten_url }}";
+  if (window.location.pathname !== "/" && !hasShortenURL) {
     window.location.pathname = "/";
   }
+  const fullShortenURL = `${window.location.href.split("/").slice(0, 3).join("/")}/${shortenURL}`;
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {shortenURL && (
+        {hasShortenURL && (
           <>
             <p>
               Your shorten URL is below!
             </p>
             <text>
-              {shortenURL}
+              {fullShortenURL}
             </text>
           </>
         )}

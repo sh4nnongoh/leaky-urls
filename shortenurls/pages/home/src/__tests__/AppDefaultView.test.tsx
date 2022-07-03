@@ -8,8 +8,8 @@ Then user sees the static information
 `;
 describe(userStory, () => {
   render(<App />);
-  it("shows the phrase learn react", () => {
-    const linkElement = screen.getByText(/learn react/i);
+  it("shows the label", () => {
+    const linkElement = screen.getByText(/Enter the URL you want shorten below!/i);
     expect(linkElement).toBeInTheDocument();
   });
 });

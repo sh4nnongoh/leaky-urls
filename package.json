@@ -15,6 +15,6 @@
     "app:shorten-details": "yarn workspace @leaky-urls/shorten-details",
     "lint": "yarn app:home lint && yarn app:shorten lint && yarn app:shorten-details lint",
     "build": "yarn lint && yarn app:home build && yarn app:shorten build && yarn app:shorten-details build",
-    "start": "pipenv run manage.py runserver"
+    "start": "pipenv run ./manage.py runserver"
   }
 }

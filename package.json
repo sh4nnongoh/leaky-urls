@@ -1,0 +1,20 @@
+{
+  "name": "leaky-urls",
+  "version": "1.0.0",
+  "author": "Shannon <sh4nnongoh@gmail.com>",
+  "license": "Apache-2.0",
+  "private": true,
+  "workspaces": [
+    "shortenurls/pages/home",
+    "shortenurls/pages/shorten/",
+    "shortenurls/pages/shorten-details/"
+  ],
+  "scripts": {
+    "app:home": "yarn workspace @leaky-urls/home",
+    "app:shorten": "yarn workspace @leaky-urls/shorten",
+    "app:shorten-details": "yarn workspace @leaky-urls/shorten-details",
+    "lint": "yarn app:home lint && yarn app:shorten lint && yarn app:shorten-details lint",
+    "build": "yarn lint && yarn app:home build && yarn app:shorten build && yarn app:shorten-details build",
+    "start": "pipenv run manage.py runserver"
+  }
+}

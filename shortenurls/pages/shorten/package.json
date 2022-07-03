@@ -1,0 +1,65 @@
+{
+  "name": "@leaky-urls/shorten",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/fs-extra": "^9.0.13",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/parser": "^5.30.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-import-resolver-typescript": "^3.1.5",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "install-peerdeps": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-snap": "^1.23.0",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "lint": "yarn eslint --ext .ts,.tsx src/ --fix",
+    "start": "react-scripts start",
+    "test": "react-scripts test --coverage --watchAll",
+    "test:ci": "cross-env CI=true react-scripts test",
+    "copy": "node scripts/copy.js",
+    "edit-index": "node scripts/edit-index.js",
+    "postbuild": "react-snap && yarn edit-index && yarn copy"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "./src/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 90
+      }
+    },
+    "coveragePathIgnorePatterns": []
+  }
+}

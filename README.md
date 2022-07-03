@@ -125,8 +125,10 @@ A modern _JAMStack_ WebApp would usually separate out the frontend code and rely
 
 Ensure you have the dependencies listed in [Quick Start](#Quick-Start).
 
+Within each of the respective React apps, devs may use `react-scripts` to develop locally without any need to interact with Django. As data is passed into the React apps using `window.django` objects, react devs can simply mock those objects and carry on with their development. It is recommended to adopt Test/Behavior Driven Development using `React Testing Library (RTL)` and `jest`.
+
 ## Test-Driven Development
 
-Navigating to `src/__tests__` in the respective React Apps, one can see that the tests are written in a way that mimics the actual `User Story`. This acts as a contract between developers and the product owner as to what features have been completed, and will carry on to exist throughout the product lifecycle. With `React Testing Library (RTL)`, writing `User Story` tests that mimics actual user behavior is made possible, while also being able to execute as fast as how traditonal unit tests do.
+Navigating to `src/__tests__` in the respective React Apps, one can see that the tests are written in a way that mimics the actual `User Story`. This acts as a contract between developers and the product owner as to what features have been completed, and will carry on to exist throughout the product lifecycle. With `RTL`, writing `User Story` tests that mimics actual user behavior is made possible, while also being able to execute as fast as how traditonal unit tests do.
 
 As for testing Django, ideally unit tests should be written for each of the functions and integration tests written to test the routes. However, due to time constraints given for this project, it was left out.
